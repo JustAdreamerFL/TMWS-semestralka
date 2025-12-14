@@ -1,0 +1,15 @@
+struktura projektu/
+jeden všeobecny css a asi aj js?
+
+potom nejake page specific js a css
+
+chcem aby boli stranky prelinkovane do header baru na hlavnej index stranke
+stranky ktore tam chcem mať: v pravom rohu sign in
+                            categories
+                            about
+                            contact
+                            nominees
+                            faq
+                            guess the game from description game - gtg
+
+potom v footery chcem mať

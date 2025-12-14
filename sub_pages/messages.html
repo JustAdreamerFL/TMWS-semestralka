@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="sk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Správy - Game Awards 2025</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="../dist/style.css" />
+        <script src="../components.js" defer></script>
+        <script src="../script.js" defer></script>
+    </head>
+    <body class="page-wrapper">
+        <!-- Header - Auto-injected -->
+        <div data-component="header"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <section class="page-header">
+                <h1 class="page-title">📬 Prijaté Správy</h1>
+                <p class="page-subtitle-center">
+                    Prehľad všetkých odoslaných správ z kontaktného formulára
+                </p>
+            </section>
+
+            <!-- Stats -->
+            <section class="flex justify-center gap-8 mb-8">
+                <div class="text-center">
+                    <div
+                        class="text-3xl font-bold text-green-400"
+                        id="message-count"
+                    >
+                        0
+                    </div>
+                    <div class="text-gray-500 text-sm">Celkom správ</div>
+                </div>
+            </section>
+
+            <!-- Actions -->
+            <section class="content-center mb-8">
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="contact.html" class="btn btn-primary">
+                        ✉️ Nová správa
+                    </a>
+                    <button
+                        id="clear-all-btn"
+                        class="btn btn-ghost"
+                        onclick="clearAllMessages()"
+                    >
+                        🗑️ Zmazať všetky
+                    </button>
+                    <button
+                        id="refresh-btn"
+                        class="btn btn-secondary"
+                        onclick="renderMessages()"
+                    >
+                        🔄 Obnoviť
+                    </button>
+                </div>
+            </section>
+
+            <!-- Messages Container -->
+            <section class="content-center">
+                <div id="messages-container">
+                    <!-- Messages will be loaded here -->
+                </div>
+
+                <!-- No Messages State -->
+                <div id="no-messages" class="no-results hidden">
+                    <div class="no-results-icon">📭</div>
+                    <h3 class="no-results-title">Žiadne správy</h3>
+                    <p class="no-results-text mb-6">
+                        Zatiaľ neboli odoslané žiadne správy z kontaktného
+                        formulára.
+                    </p>
+                    <a href="contact.html" class="btn btn-primary">
+                        Odoslať prvú správu
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer - Auto-injected -->
+        <div data-component="footer"></div>
+
+        <!-- Page specific script -->
+        <script>
+            // Render all messages
+            function renderMessages() {
+                const container = document.getElementById("messages-container");
+                const noMessages = document.getElementById("no-messages");
+                const countEl = document.getElementById("message-count");
+
+                let messages = [];
+
+                // Get messages from MessagesManager or localStorage
+                if (typeof MessagesManager !== "undefined") {
+                    messages = MessagesManager.getMessages();
+                } else {
+                    const data = localStorage.getItem("gameAwardsMessages");
+                    messages = data ? JSON.parse(data) : [];
+                }
+
+                // Update count
+                countEl.textContent = messages.length;
+
+                if (messages.length === 0) {
+                    container.innerHTML = "";
+                    noMessages.classList.remove("hidden");
+                    return;
+                }
+
+                noMessages.classList.add("hidden");
+
+                // Render messages
+                let html = "";
+                messages.forEach((message, index) => {
+                    const date = new Date(message.timestamp).toLocaleString(
+                        "sk-SK",
+                    );
+
+                    html += `
+                    <div class="message-card" data-index="${index}">
+                        <div class="message-header">
+                            <div>
+                                <div class="message-sender">${escapeHtml(message.name)}</div>
+                                <div class="message-email">${escapeHtml(message.email)}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="message-date">${date}</div>
+                                <button class="message-delete-btn" onclick="deleteMessage(${index})">
+                                    🗑️ Zmazať
+                                </button>
+                            </div>
+                        </div>
+                        <div class="message-subject">📋 ${escapeHtml(message.subject)}</div>
+                        <div class="message-content">${escapeHtml(message.message)}</div>
+                    </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+            }
+
+            // Delete single message
+            function deleteMessage(index) {
+                if (confirm("Naozaj chcete zmazať túto správu?")) {
+                    if (typeof MessagesManager !== "undefined") {
+                        MessagesManager.deleteMessage(index);
+                    } else {
+                        const messages = JSON.parse(
+                            localStorage.getItem("gameAwardsMessages") || "[]",
+                        );
+                        messages.splice(index, 1);
+                        localStorage.setItem(
+                            "gameAwardsMessages",
+                            JSON.stringify(messages),
+                        );
+                        renderMessages();
+                    }
+
+                    if (typeof showNotification === "function") {
+                        showNotification("Správa bola zmazaná", "success");
+                    }
+                }
+            }
+
+            // Clear all messages
+            function clearAllMessages() {
+                const messages =
+                    typeof MessagesManager !== "undefined"
+                        ? MessagesManager.getMessages()
+                        : JSON.parse(
+                              localStorage.getItem("gameAwardsMessages") ||
+                                  "[]",
+                          );
+
+                if (messages.length === 0) {
+                    if (typeof showNotification === "function") {
+                        showNotification("Žiadne správy na zmazanie", "info");
+                    }
+                    return;
+                }
+
+                if (
+                    confirm(
+                        `Naozaj chcete zmazať všetkých ${messages.length} správ?`,
+                    )
+                ) {
+                    if (typeof MessagesManager !== "undefined") {
+                        MessagesManager.clearAllMessages();
+                    } else {
+                        localStorage.removeItem("gameAwardsMessages");
+                        renderMessages();
+                    }
+
+                    if (typeof showNotification === "function") {
+                        showNotification(
+                            "Všetky správy boli zmazané",
+                            "success",
+                        );
+                    }
+                }
+            }
+
+            // Escape HTML to prevent XSS
+            function escapeHtml(text) {
+                const div = document.createElement("div");
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // Initialize on load
+            document.addEventListener("DOMContentLoaded", function () {
+                // Small delay to ensure MessagesManager is loaded
+                setTimeout(renderMessages, 100);
+            });
+        </script>
+    </body>
+</html>

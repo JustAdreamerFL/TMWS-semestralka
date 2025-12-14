@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="sk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hádaj Hru - Game Awards 2025</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="../dist/style.css" />
+        <script src="../components.js" defer></script>
+        <script src="../script.js" defer></script>
+        <script src="scripts/gtg.js" defer></script>
+    </head>
+    <body class="page-wrapper">
+        <!-- Header - Auto-injected -->
+        <div data-component="header"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <section class="page-header-sm">
+                <h1 class="page-title">🎯 Hádaj Hru</h1>
+                <p class="page-subtitle-center">
+                    Dokážeš uhádnuť hru len podľa jej opisu? Otestuj svoje
+                    znalosti!
+                </p>
+            </section>
+
+            <!-- Game Stats -->
+            <section class="game-stats">
+                <div class="game-stat">
+                    <div class="game-stat-value-green" id="score">0</div>
+                    <div class="game-stat-label">Skóre</div>
+                </div>
+                <div class="game-stat">
+                    <div class="game-stat-value-yellow" id="streak">0</div>
+                    <div class="game-stat-label">Séria</div>
+                </div>
+                <div class="game-stat">
+                    <div class="game-stat-value-purple" id="round">1</div>
+                    <div class="game-stat-label">Kolo</div>
+                </div>
+            </section>
+
+            <!-- Game Area -->
+            <section class="content-center">
+                <!-- Description Card -->
+                <div class="card card-body-lg mb-6">
+                    <div class="flex-between mb-4">
+                        <h2 class="text-xl font-semibold text-accent">
+                            Opis hry:
+                        </h2>
+                        <div class="flex items-center gap-2">
+                            <span class="text-muted text-sm">Pokusy:</span>
+                            <div id="attempts" class="attempts-container">
+                                <span
+                                    class="attempt-dot attempt-dot-active"
+                                ></span>
+                                <span
+                                    class="attempt-dot attempt-dot-active"
+                                ></span>
+                                <span
+                                    class="attempt-dot attempt-dot-active"
+                                ></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p
+                        id="game-description"
+                        class="text-lg text-gray-200 leading-relaxed"
+                    >
+                        Načítavam hru...
+                    </p>
+                </div>
+
+                <!-- Hints Section -->
+                <div class="hints-container">
+                    <h3 class="hints-title">💡 Nápovedy:</h3>
+                    <div id="hints" class="space-y-2">
+                        <p class="text-muted italic">
+                            Nápovedy sa zobrazia po nesprávnej odpovedi
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Input Section -->
+                <div class="card card-body mb-6">
+                    <form
+                        id="guess-form"
+                        class="flex flex-col md:flex-row gap-4"
+                    >
+                        <input
+                            type="text"
+                            id="guess-input"
+                            placeholder="Zadaj názov hry..."
+                            autocomplete="off"
+                            class="form-input-lg flex-grow"
+                        />
+                        <button type="submit" class="btn btn-primary">
+                            Hádať
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Result Message -->
+                <div id="result-message" class="result-message hidden">
+                    <div id="result-icon" class="result-icon"></div>
+                    <h3 id="result-title" class="result-title"></h3>
+                    <p id="result-text" class="result-text"></p>
+                    <button id="next-btn" class="btn btn-success">
+                        Ďalšia hra →
+                    </button>
+                </div>
+
+                <!-- Skip Button -->
+                <div class="text-center">
+                    <button id="skip-btn" class="btn-link-muted">
+                        Neviem, preskočiť hru
+                    </button>
+                </div>
+            </section>
+
+            <!-- How to Play -->
+            <section class="how-to-play">
+                <div class="gradient-card-border">
+                    <h2 class="text-xl font-bold mb-4">📖 Ako hrať</h2>
+                    <div
+                        class="grid md:grid-cols-3 gap-4 text-sm text-gray-300"
+                    >
+                        <div class="how-to-play-step">
+                            <span class="how-to-play-number">1</span>
+                            <p>Prečítaj si opis hry a skús uhádnuť jej názov</p>
+                        </div>
+                        <div class="how-to-play-step">
+                            <span class="how-to-play-number">2</span>
+                            <p>
+                                Máš 3 pokusy - s každým nesprávnym dostaneš
+                                nápovedu
+                            </p>
+                        </div>
+                        <div class="how-to-play-step">
+                            <span class="how-to-play-number">3</span>
+                            <p>
+                                Čím rýchlejšie uhádneš, tým viac bodov získaš!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer - Auto-injected -->
+        <div data-component="footer"></div>
+    </body>
+</html>

@@ -1,31 +1,110 @@
 <!doctype html>
-<html lang="en">
+<html lang="sk">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="js.js"></script>
-        <link rel="stylesheet" href="style.css" />
-        <title>Game Awards</title>
+        <title>Game Awards 2025</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="dist/style.css" />
+        <script src="components.js" defer></script>
+        <script src="script.js" defer></script>
     </head>
-    <body>
-        <header class="header">
-            <a href="index.html">home</a>
-            <a href="sub_pages/nominees.html">nominees </a>
-            <a href="sub_pages/faq.html">faq</a>
-            <a href="sub_pages/about.html">about</a>
-            <a href="sub_pages/contact.html">contact</a>
-        </header>
+    <body class="page-wrapper">
+        <!-- Header - Auto-injected -->
+        <div data-component="header"></div>
 
-        <footer>
-            <div class="footer">
-                <a href="sub_pages/about.html">about</a>
-                <br />
-                <span>© Bohuslav Uličný • 2025</span>
-                <br />
-                <a href="sub_pages/contact.html"
-                    >dozvedeli ste sa čo ste chceli? ak nie, dajte mi vedieť</a
-                >
-            </div>
-        </footer>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="page-title-lg">Game Awards 2025</h1>
+                <p class="page-subtitle-center mb-8">
+                    Vitajte na stránke venovanej najlepším hrám roku 2025.
+                    Objavte nominovaných, hlasujte za svojich favoritov a
+                    zahrajte si našu mini hru!
+                </p>
+                <div class="hero-buttons">
+                    <a
+                        href="sub_pages/nominees.html"
+                        class="btn btn-primary btn-lg"
+                    >
+                        Pozri Nominovaných
+                    </a>
+                    <a
+                        href="sub_pages/gtg.html"
+                        class="btn btn-secondary btn-lg"
+                    >
+                        Hádaj Hru
+                    </a>
+                </div>
+            </section>
+
+            <!-- Categories Preview -->
+            <section class="section">
+                <h2 class="section-title-center">Hlavné Kategórie</h2>
+                <div class="grid-3">
+                    <div class="feature-card">
+                        <div class="feature-card-icon">🏆</div>
+                        <h3 class="feature-card-title">Hra Roku</h3>
+                        <p class="feature-card-desc">
+                            Najlepšia hra celkovo v roku 2025
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">🎨</div>
+                        <h3 class="feature-card-title">Najlepší Art Design</h3>
+                        <p class="feature-card-desc">Vizuálne najkrajšia hra</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">🎵</div>
+                        <h3 class="feature-card-title">Najlepší Soundtrack</h3>
+                        <p class="feature-card-desc">Najlepšia herná hudba</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">📖</div>
+                        <h3 class="feature-card-title">Najlepší Príbeh</h3>
+                        <p class="feature-card-desc">
+                            Najlepšia naratívna skúsenosť
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">🎮</div>
+                        <h3 class="feature-card-title">Najlepší Gameplay</h3>
+                        <p class="feature-card-desc">
+                            Najzábavnejšie herné mechaniky
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">🌟</div>
+                        <h3 class="feature-card-title">Najlepšie Indie</h3>
+                        <p class="feature-card-desc">Najlepšia nezávislá hra</p>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="sub_pages/categories.html" class="btn-link">
+                        Zobraziť všetky kategórie →
+                    </a>
+                </div>
+            </section>
+
+            <!-- Mini Game Promo -->
+            <section class="promo-card">
+                <div class="promo-card-content">
+                    <div class="promo-card-text">
+                        <h2 class="promo-card-title">🎯 Hádaj Hru!</h2>
+                        <p class="promo-card-desc">
+                            Otestuj svoje znalosti hier! Dokážeš uhádnuť hru len
+                            podľa jej opisu?
+                        </p>
+                    </div>
+                    <a href="sub_pages/gtg.html" class="btn btn-white btn-lg">
+                        Hrať Teraz
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer - Auto-injected -->
+        <div data-component="footer"></div>
     </body>
 </html>

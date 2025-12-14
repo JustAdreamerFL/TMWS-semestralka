@@ -1,0 +1,16 @@
+{
+  "name": "game-awards-2025",
+  "version": "1.0.0",
+  "description": "Game Awards 2025 - Semestrálna práca",
+  "author": "Bohuslav Uličný",
+  "license": "MIT",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/style.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/style.css --watch",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/style.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/style.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

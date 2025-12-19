@@ -10,12 +10,8 @@
         <script src="../script.js" defer></script>
     </head>
     <body class="page-wrapper">
-        <!-- Header - Auto-injected -->
         <div data-component="header"></div>
-
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Page Header -->
             <section class="page-header">
                 <h1 class="page-title">Kontaktujte Nás</h1>
                 <p class="page-subtitle-center">
@@ -23,9 +19,7 @@
                     kontaktovať!
                 </p>
             </section>
-
             <div class="contact-grid">
-                <!-- Contact Form -->
                 <div class="card card-body-lg">
                     <h2 class="text-2xl font-bold mb-6 text-green-400">
                         Napíšte nám
@@ -42,7 +36,6 @@
                                 placeholder="Vaše meno"
                             />
                         </div>
-
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
                             <input
@@ -54,7 +47,6 @@
                                 placeholder="vas@email.com"
                             />
                         </div>
-
                         <div class="form-group">
                             <label for="subject" class="form-label"
                                 >Predmet</label
@@ -84,7 +76,6 @@
                                 <option value="Iné">Iné</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label for="message" class="form-label"
                                 >Správa</label
@@ -98,15 +89,11 @@
                                 placeholder="Vaša správa..."
                             ></textarea>
                         </div>
-
                         <button type="submit" class="form-submit">
                             Odoslať správu
                         </button>
                     </form>
-
-                    <!-- Success Message (hidden by default) -->
                     <div id="success-message" class="success-message hidden">
-                        <span class="text-4xl">✓</span>
                         <p class="mt-2 text-lg">
                             Ďakujeme za vašu správu! Bola uložená a ozveme sa
                             vám čo najskôr.
@@ -119,19 +106,13 @@
                         </a>
                     </div>
                 </div>
-
-                <!-- Contact Info -->
                 <div class="space-y-6">
                     <div class="card card-body-lg">
                         <h2 class="text-2xl font-bold mb-6 text-green-400">
                             Kontaktné informácie
                         </h2>
-
                         <div class="space-y-6">
                             <div class="contact-info-item">
-                                <div class="contact-info-icon">
-                                    <span class="text-2xl">📧</span>
-                                </div>
                                 <div>
                                     <h3 class="contact-info-title">Email</h3>
                                     <p class="contact-info-text">
@@ -139,11 +120,7 @@
                                     </p>
                                 </div>
                             </div>
-
                             <div class="contact-info-item">
-                                <div class="contact-info-icon">
-                                    <span class="text-2xl">📍</span>
-                                </div>
                                 <div>
                                     <h3 class="contact-info-title">Adresa</h3>
                                     <p class="contact-info-text">
@@ -153,11 +130,7 @@
                                     </p>
                                 </div>
                             </div>
-
                             <div class="contact-info-item">
-                                <div class="contact-info-icon">
-                                    <span class="text-2xl">🕐</span>
-                                </div>
                                 <div>
                                     <h3 class="contact-info-title">
                                         Pracovná doba
@@ -170,41 +143,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Social Media -->
-                    <div class="card card-body-lg">
-                        <h2 class="text-2xl font-bold mb-6 text-green-400">
-                            Sledujte nás
-                        </h2>
-                        <div class="social-links">
-                            <a
-                                href="#"
-                                class="social-link social-link-facebook"
-                            >
-                                <span class="text-xl">📘</span>
-                            </a>
-                            <a href="#" class="social-link social-link-twitter">
-                                <span class="text-xl">🐦</span>
-                            </a>
-                            <a
-                                href="#"
-                                class="social-link social-link-instagram"
-                            >
-                                <span class="text-xl">📸</span>
-                            </a>
-                            <a href="#" class="social-link social-link-youtube">
-                                <span class="text-xl">🎬</span>
-                            </a>
-                            <a href="#" class="social-link social-link-discord">
-                                <span class="text-xl">🎮</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- View Messages Link -->
                     <div class="gradient-card">
                         <h3 class="text-xl font-bold mb-3 text-green-400">
-                            📬 Prijaté správy
+                            Prijaté správy
                         </h3>
                         <p class="text-gray-400 mb-4">
                             Pozrite si všetky odoslané správy uložené v systéme.
@@ -213,37 +154,17 @@
                             Zobraziť správy →
                         </a>
                     </div>
-
-                    <!-- FAQ Link -->
-                    <div class="gradient-card">
-                        <h3 class="text-xl font-bold mb-3 text-green-400">
-                            Máte často kladené otázky?
-                        </h3>
-                        <p class="text-gray-400 mb-4">
-                            Pozrite si našu sekciu FAQ, kde nájdete odpovede na
-                            najčastejšie otázky.
-                        </p>
-                        <a href="faq.html" class="btn-link">
-                            Prejsť na FAQ →
-                        </a>
-                    </div>
                 </div>
             </div>
         </main>
-
-        <!-- Footer - Auto-injected -->
         <div data-component="footer"></div>
-
-        <!-- Page specific script -->
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const form = document.getElementById("contact-form");
                 const successMessage =
                     document.getElementById("success-message");
-
                 form.addEventListener("submit", function (e) {
                     e.preventDefault();
-
                     // Get form data
                     const formData = {
                         name: document.getElementById("name").value,
@@ -251,14 +172,12 @@
                         subject: document.getElementById("subject").value,
                         message: document.getElementById("message").value,
                     };
-
                     // Simulate form submission
                     const submitBtn = form.querySelector(
                         'button[type="submit"]',
                     );
                     submitBtn.textContent = "Odosielam...";
                     submitBtn.disabled = true;
-
                     setTimeout(function () {
                         // Save to localStorage using MessagesManager
                         if (typeof MessagesManager !== "undefined") {
@@ -279,11 +198,9 @@
                                 JSON.stringify(messages),
                             );
                         }
-
                         // Show success message
                         form.classList.add("hidden");
                         successMessage.classList.remove("hidden");
-
                         // Show notification
                         if (typeof showNotification === "function") {
                             showNotification(

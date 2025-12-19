@@ -11,12 +11,8 @@
         <script src="scripts/nominees.js" defer></script>
     </head>
     <body class="page-wrapper">
-        <!-- Header - Auto-injected -->
         <div data-component="header"></div>
-
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Page Header -->
             <section class="page-header">
                 <h1 class="page-title">Nominovaní 2025</h1>
                 <p class="page-subtitle-center">
@@ -24,12 +20,9 @@
                     za svojich favoritov
                 </p>
             </section>
-
-            <!-- Search and Filter -->
             <section class="mb-8">
                 <div class="content-center">
                     <div class="flex flex-col md:flex-row gap-4">
-                        <!-- Search Input -->
                         <div class="search-input-wrapper">
                             <input
                                 type="text"
@@ -51,7 +44,6 @@
                                 ></path>
                             </svg>
                         </div>
-                        <!-- Category Filter -->
                         <select id="category-filter" class="form-select">
                             <option value="all">Všetky kategórie</option>
                             <option value="goty">Hra Roku</option>
@@ -70,17 +62,10 @@
                     </div>
                 </div>
             </section>
-
-            <!-- Nominees Grid -->
             <section id="nominees-container" class="section-sm">
-                <!-- Game of the Year Category -->
                 <div class="category-section" data-category="goty">
-                    <h2 class="category-section-title">
-                        <span class="category-section-icon">🏆</span>
-                        Hra Roku
-                    </h2>
+                    <h2 class="category-section-title">Hra Roku</h2>
                     <div class="grid-3">
-                        <!-- Game Card 1 -->
                         <div
                             class="game-card"
                             data-game="elden ring shadow of the erdtree"
@@ -88,9 +73,7 @@
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-yellow-600 to-orange-800"
-                                >
-                                    <span class="text-6xl">⚔️</span>
-                                </div>
+                                ></div>
                                 <span class="badge-favorite">FAVORIT</span>
                             </div>
                             <div class="game-card-content">
@@ -108,15 +91,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Game Card 2 -->
                         <div class="game-card" data-game="black myth wukong">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-red-600 to-yellow-600"
-                                >
-                                    <span class="text-6xl">🐵</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">
@@ -129,14 +108,12 @@
                                 </p>
                                 <div class="game-card-footer">
                                     <span class="badge badge-action"
-                                        >Akcia</span
+                                        >Akčná</span
                                     >
                                     <button class="vote-btn">Hlasovať</button>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Game Card 3 -->
                         <div
                             class="game-card"
                             data-game="final fantasy 7 rebirth"
@@ -144,9 +121,7 @@
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-blue-600 to-purple-600"
-                                >
-                                    <span class="text-6xl">⚡</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">
@@ -166,22 +141,14 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Best Indie Category -->
                 <div class="category-section" data-category="indie">
-                    <h2 class="category-section-title">
-                        <span class="category-section-icon">🌟</span>
-                        Najlepšie Indie
-                    </h2>
+                    <h2 class="category-section-title">Najlepšie Indie</h2>
                     <div class="grid-3">
-                        <!-- Indie Game 1 -->
                         <div class="game-card" data-game="hades 2">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-red-500 to-purple-700"
-                                >
-                                    <span class="text-6xl">🔥</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">Hades II</h3>
@@ -196,15 +163,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Indie Game 2 -->
                         <div class="game-card" data-game="animal well">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-green-600 to-teal-500"
-                                >
-                                    <span class="text-6xl">🦔</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">Animal Well</h3>
@@ -219,15 +182,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Indie Game 3 -->
                         <div class="game-card" data-game="balatro">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-purple-500 to-pink-600"
-                                >
-                                    <span class="text-6xl">🃏</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">Balatro</h3>
@@ -244,15 +203,9 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Best Narrative Category -->
                 <div class="category-section" data-category="narrative">
-                    <h2 class="category-section-title">
-                        <span class="category-section-icon">📖</span>
-                        Najlepší Príbeh
-                    </h2>
+                    <h2 class="category-section-title">Najlepší Príbeh</h2>
                     <div class="grid-3">
-                        <!-- Narrative Game 1 -->
                         <div
                             class="game-card"
                             data-game="like a dragon infinite wealth"
@@ -260,9 +213,7 @@
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-blue-500 to-cyan-400"
-                                >
-                                    <span class="text-6xl">🐉</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">
@@ -281,15 +232,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Narrative Game 2 -->
                         <div class="game-card" data-game="metaphor refantazio">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-indigo-600 to-purple-800"
-                                >
-                                    <span class="text-6xl">👑</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">
@@ -306,8 +253,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Narrative Game 3 -->
                         <div
                             class="game-card"
                             data-game="senuas saga hellblade 2"
@@ -315,9 +260,7 @@
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-gray-700 to-blue-900"
-                                >
-                                    <span class="text-6xl">🗡️</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">
@@ -339,22 +282,14 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Best Multiplayer Category -->
                 <div class="category-section" data-category="multiplayer">
-                    <h2 class="category-section-title">
-                        <span class="category-section-icon">👥</span>
-                        Najlepší Multiplayer
-                    </h2>
+                    <h2 class="category-section-title">Najlepší Multiplayer</h2>
                     <div class="grid-3">
-                        <!-- Multiplayer Game 1 -->
                         <div class="game-card" data-game="helldivers 2">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-yellow-500 to-red-600"
-                                >
-                                    <span class="text-6xl">🪖</span>
-                                </div>
+                                ></div>
                                 <span class="badge-hit">HIT</span>
                             </div>
                             <div class="game-card-content">
@@ -369,21 +304,17 @@
                                 </p>
                                 <div class="game-card-footer">
                                     <span class="badge badge-action"
-                                        >Akcia</span
+                                        >Akčná</span
                                     >
                                     <button class="vote-btn">Hlasovať</button>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Multiplayer Game 2 -->
                         <div class="game-card" data-game="tekken 8">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-red-700 to-orange-500"
-                                >
-                                    <span class="text-6xl">👊</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">Tekken 8</h3>
@@ -400,15 +331,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Multiplayer Game 3 -->
                         <div class="game-card" data-game="content warning">
                             <div class="relative">
                                 <div
                                     class="game-card-image bg-gradient-to-br from-gray-600 to-gray-800"
-                                >
-                                    <span class="text-6xl">📹</span>
-                                </div>
+                                ></div>
                             </div>
                             <div class="game-card-content">
                                 <h3 class="game-card-title">Content Warning</h3>
@@ -426,18 +353,13 @@
                     </div>
                 </div>
             </section>
-
-            <!-- No Results Message -->
             <div class="no-results hidden" id="no-results">
-                <div class="no-results-icon">🔍</div>
                 <h3 class="no-results-title">Žiadne výsledky</h3>
                 <p class="no-results-text">
                     Skúste zmeniť vyhľadávací výraz alebo filter
                 </p>
             </div>
         </main>
-
-        <!-- Footer - Auto-injected -->
         <div data-component="footer"></div>
     </body>
 </html>

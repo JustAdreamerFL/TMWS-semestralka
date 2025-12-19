@@ -11,21 +11,15 @@
         <script src="scripts/gtg.js" defer></script>
     </head>
     <body class="page-wrapper">
-        <!-- Header - Auto-injected -->
         <div data-component="header"></div>
-
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Page Header -->
             <section class="page-header-sm">
-                <h1 class="page-title">🎯 Hádaj Hru</h1>
+                <h1 class="page-title">Hádaj Hru</h1>
                 <p class="page-subtitle-center">
                     Dokážeš uhádnuť hru len podľa jej opisu? Otestuj svoje
                     znalosti!
                 </p>
             </section>
-
-            <!-- Game Stats -->
             <section class="game-stats">
                 <div class="game-stat">
                     <div class="game-stat-value-green" id="score">0</div>
@@ -40,10 +34,7 @@
                     <div class="game-stat-label">Kolo</div>
                 </div>
             </section>
-
-            <!-- Game Area -->
             <section class="content-center">
-                <!-- Description Card -->
                 <div class="card card-body-lg mb-6">
                     <div class="flex-between mb-4">
                         <h2 class="text-xl font-semibold text-accent">
@@ -71,18 +62,14 @@
                         Načítavam hru...
                     </p>
                 </div>
-
-                <!-- Hints Section -->
                 <div class="hints-container">
-                    <h3 class="hints-title">💡 Nápovedy:</h3>
+                    <h3 class="hints-title">Nápovedy:</h3>
                     <div id="hints" class="space-y-2">
                         <p class="text-muted italic">
                             Nápovedy sa zobrazia po nesprávnej odpovedi
                         </p>
                     </div>
                 </div>
-
-                <!-- Input Section -->
                 <div class="card card-body mb-6">
                     <form
                         id="guess-form"
@@ -100,29 +87,23 @@
                         </button>
                     </form>
                 </div>
-
-                <!-- Result Message -->
                 <div id="result-message" class="result-message hidden">
                     <div id="result-icon" class="result-icon"></div>
                     <h3 id="result-title" class="result-title"></h3>
                     <p id="result-text" class="result-text"></p>
                     <button id="next-btn" class="btn btn-success">
-                        Ďalšia hra →
+                        Ďalej →
                     </button>
                 </div>
-
-                <!-- Skip Button -->
                 <div class="text-center">
                     <button id="skip-btn" class="btn-link-muted">
-                        Neviem, preskočiť hru
+                        Neviem, preskočiť
                     </button>
                 </div>
             </section>
-
-            <!-- How to Play -->
             <section class="how-to-play">
                 <div class="gradient-card-border">
-                    <h2 class="text-xl font-bold mb-4">📖 Ako hrať</h2>
+                    <h2 class="text-xl font-bold mb-4">Ako hrať</h2>
                     <div
                         class="grid md:grid-cols-3 gap-4 text-sm text-gray-300"
                     >
@@ -147,8 +128,6 @@
                 </div>
             </section>
         </main>
-
-        <!-- Footer - Auto-injected -->
         <div data-component="footer"></div>
     </body>
 </html>

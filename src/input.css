@@ -1,20 +1,7 @@
-/* ============================================
-   GAME AWARDS - COMPONENT-BASED CSS SYSTEM
-   Using Tailwind @apply for reusable components
-   Razer-style Green & Black Theme
-   ============================================ */
-
-/* Import Tailwind base layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap");
-
-/* ============================================
-   CSS VARIABLES / THEME - RAZER GREEN & BLACK
-   ============================================ */
 :root {
     --primary-color: #00ff00;
     --primary-hover: #00cc00;
@@ -28,994 +15,809 @@
     --darker-bg: #000000;
     --card-bg: #111111;
     --card-hover: #1a1a1a;
+    --input-bg: #18181b;
+    --input-border: rgba(20, 83, 45, 0.5);
     --text-primary: #ffffff;
-    --text-secondary: #888888;
+    --text-secondary: #d1d5db;
     --border-color: #222222;
     --glow-color: rgba(0, 255, 0, 0.3);
 }
-
-/* ============================================
-   BASE STYLES
-   ============================================ */
+[data-theme="light"] {
+    --primary-color: #16a34a;
+    --primary-hover: #15803d;
+    --primary-dark: #166534;
+    --secondary-color: #22c55e;
+    --accent-color: #4ade80;
+    --success-color: #22c55e;
+    --error-color: #dc2626;
+    --warning-color: #d97706;
+    --dark-bg: #f3f4f6;
+    --darker-bg: #ffffff;
+    --card-bg: #ffffff;
+    --card-hover: #f9fafb;
+    --input-bg: #ffffff;
+    --input-border: #e5e7eb;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --border-color: #e5e7eb;
+    --glow-color: rgba(22, 163, 74, 0.2);
+}
 @layer base {
     * {
         @apply m-0 p-0 box-border;
     }
-
     html {
         @apply scroll-smooth;
     }
-
     body {
         font-family: "Inter", sans-serif;
-        @apply bg-black text-white min-h-screen flex flex-col leading-relaxed;
+        @apply min-h-screen flex flex-col leading-relaxed;
+        background-color: var(--darker-bg);
+        color: var(--text-primary);
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease;
     }
-
-    /* Scrollbar styling */
     ::-webkit-scrollbar {
         @apply w-2;
     }
-
     ::-webkit-scrollbar-track {
         @apply bg-black;
     }
-
     ::-webkit-scrollbar-thumb {
         @apply bg-green-900 rounded;
     }
-
     ::-webkit-scrollbar-thumb:hover {
         @apply bg-green-500;
     }
-
-    /* Selection styling */
     ::selection {
         @apply bg-green-500 text-black;
     }
 }
-
-/* ============================================
-   LAYOUT COMPONENTS
-   ============================================ */
 @layer components {
-    /* Container */
     .container-main {
         @apply container mx-auto px-4;
     }
-
-    /* Page wrapper */
     .page-wrapper {
-        @apply min-h-screen flex flex-col bg-black text-white;
+        @apply min-h-screen flex flex-col;
+        background-color: var(--darker-bg);
+        color: var(--text-primary);
     }
-
-    /* Main content area */
     .main-content {
         @apply flex-grow container mx-auto px-4 py-8;
     }
-
-    /* Section spacing */
     .section {
         @apply py-12;
     }
-
     .section-sm {
         @apply py-8;
     }
-
     .section-lg {
         @apply py-16;
     }
 }
-
-/* ============================================
-   HEADER & NAVIGATION COMPONENTS
-   ============================================ */
 @layer components {
-    /* Header */
     .header {
-        @apply bg-black shadow-lg sticky top-0 z-50 border-b border-green-900/50;
+        @apply shadow-lg sticky top-0 z-50;
+        background-color: var(--darker-bg);
+        border-bottom: 1px solid var(--border-color);
     }
-
     .header-nav {
         @apply container mx-auto px-4 py-4;
     }
-
     .header-content {
         @apply flex items-center justify-between;
     }
-
-    /* Logo */
     .logo {
         @apply flex items-center space-x-3;
     }
-
     .logo-icon {
         @apply w-12 h-12 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center;
         box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     }
-
     .logo-icon-sm {
         @apply w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center;
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
     }
-
     .logo-text {
         @apply text-xl font-bold text-green-400;
         text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
     }
-
-    /* Navigation links */
     .nav-links {
         @apply hidden md:flex items-center space-x-6;
     }
-
     .nav-link {
-        @apply text-gray-300 hover:text-green-400 transition-colors relative;
+        @apply transition-colors relative;
+        color: var(--text-secondary);
     }
-
+    .nav-link:hover {
+        color: var(--primary-color);
+    }
     .nav-link-active {
-        @apply text-green-400 font-semibold;
-        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        @apply font-semibold;
+        color: var(--primary-color);
+        text-shadow: 0 0 10px var(--glow-color);
     }
-
     .nav-link::after {
         content: "";
         @apply absolute bottom-[-4px] left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-green-300 transition-all duration-300;
     }
-
     .nav-link:hover::after {
         @apply w-full;
     }
-
-    /* Mobile menu button */
+    .header-actions {
+        @apply flex items-center gap-2;
+    }
+    .theme-toggle-btn {
+        @apply p-2 rounded-lg transition-all duration-300;
+        color: var(--text-secondary);
+    }
+    .theme-toggle-btn:hover {
+        color: var(--primary-color);
+        background-color: var(--glow-color);
+    }
     .mobile-menu-btn {
         @apply md:hidden p-2 rounded-lg text-green-400 hover:bg-green-900/30 transition-colors;
     }
-
-    /* Mobile navigation */
     .mobile-nav {
-        @apply hidden md:hidden mt-4 pb-4 border-t border-green-900/50 pt-4;
+        @apply hidden mt-4 pb-4 border-t border-green-900/50 pt-4;
     }
-
+    .mobile-nav.mobile-nav-open {
+        @apply block md:hidden;
+    }
     .mobile-nav-links {
         @apply flex flex-col space-y-3;
     }
-
     .mobile-nav-link {
-        @apply text-gray-300 hover:text-green-400 transition-colors py-2;
+        @apply transition-colors py-2;
+        color: var(--text-secondary);
     }
-
+    .mobile-nav-link:hover {
+        color: var(--primary-color);
+    }
     .mobile-nav-link-active {
-        @apply text-green-400 font-semibold py-2;
+        @apply font-semibold py-2;
+        color: var(--primary-color);
     }
 }
-
-/* ============================================
-   FOOTER COMPONENTS
-   ============================================ */
 @layer components {
     .footer {
-        @apply bg-black mt-auto border-t border-green-900/50;
+        @apply mt-auto;
+        background-color: var(--darker-bg);
+        border-top: 1px solid var(--border-color);
     }
-
     .footer-content {
         @apply container mx-auto px-4 py-8;
     }
-
     .footer-inner {
         @apply flex flex-col md:flex-row items-center justify-between;
     }
-
     .footer-logo {
         @apply flex items-center space-x-3 mb-4 md:mb-0;
     }
-
     .footer-link {
-        @apply text-gray-400 hover:text-green-400 transition-colors;
+        @apply transition-colors;
+        color: var(--text-secondary);
     }
-
+    .footer-link:hover {
+        color: var(--primary-color);
+    }
     .footer-copyright {
-        @apply text-gray-500 text-sm;
+        @apply text-sm;
+        color: var(--text-secondary);
     }
 }
-
-/* ============================================
-   TYPOGRAPHY COMPONENTS
-   ============================================ */
 @layer components {
-    /* Page titles */
     .page-title {
-        @apply text-4xl md:text-5xl font-bold mb-4 text-green-400;
-        text-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        @apply text-4xl md:text-5xl font-bold mb-4;
+        color: var(--primary-color);
+        text-shadow: 0 0 30px var(--glow-color);
     }
-
     .page-title-lg {
-        @apply text-5xl md:text-6xl font-bold mb-6 text-green-400;
-        text-shadow: 0 0 40px rgba(0, 255, 0, 0.4);
+        @apply text-5xl md:text-6xl font-bold mb-6;
+        color: var(--primary-color);
+        text-shadow: 0 0 40px var(--glow-color);
     }
-
-    /* Section titles */
     .section-title {
-        @apply text-3xl font-bold mb-6 text-green-400;
+        @apply text-3xl font-bold mb-6;
+        color: var(--primary-color);
     }
-
     .section-title-center {
-        @apply text-3xl font-bold text-center mb-8 text-green-400;
+        @apply text-3xl font-bold mb-8 text-center;
+        color: var(--primary-color);
     }
-
-    /* Subtitles */
     .page-subtitle {
-        @apply text-xl text-gray-400 max-w-2xl mx-auto;
+        @apply text-xl max-w-2xl;
+        color: var(--text-secondary);
     }
-
     .page-subtitle-center {
-        @apply text-xl text-gray-400 max-w-2xl mx-auto text-center;
+        @apply text-xl max-w-2xl mx-auto text-center;
+        color: var(--text-secondary);
     }
-
-    /* Text styles */
     .text-muted {
-        @apply text-gray-500;
+        color: var(--text-secondary);
     }
-
     .text-accent {
-        @apply text-green-400;
+        color: var(--primary-color);
     }
 }
-
-/* ============================================
-   BUTTON COMPONENTS
-   ============================================ */
 @layer components {
-    /* Base button */
     .btn {
         @apply font-semibold py-3 px-6 rounded-lg transition-all duration-300 inline-block text-center;
     }
-
     .btn-lg {
         @apply py-3 px-8;
     }
-
     .btn-sm {
         @apply py-2 px-4 text-sm;
     }
-
-    /* Primary button */
     .btn-primary {
-        @apply bg-green-600 hover:bg-green-500 text-black font-bold;
-        box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        @apply font-bold;
+        background-color: var(--primary-color);
+        color: var(--darker-bg);
+        box-shadow: 0 0 20px var(--glow-color);
     }
-
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+    }
     .btn-primary:hover {
         box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
     }
-
-    /* Secondary button */
     .btn-secondary {
-        @apply bg-green-900 hover:bg-green-800 text-green-400;
+        background-color: var(--card-hover);
+        color: var(--primary-color);
+        border: 1px solid var(--primary-dark);
     }
-
-    /* Ghost button */
+    .btn-secondary:hover {
+        background-color: var(--primary-dark);
+        color: var(--text-primary);
+    }
     .btn-ghost {
-        @apply bg-transparent border-2 border-green-500 text-green-400 hover:bg-green-500 hover:text-black;
+        @apply bg-transparent border-2;
+        border-color: var(--primary-color);
+        color: var(--primary-color);
     }
-
-    /* White button */
+    .btn-ghost:hover {
+        background-color: var(--primary-color);
+        color: var(--darker-bg);
+    }
     .btn-white {
         @apply bg-green-400 text-black font-bold hover:bg-green-300;
         box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
     }
-
-    /* Success button */
     .btn-success {
         @apply bg-green-600 hover:bg-green-500 text-black font-bold;
     }
-
-    /* Vote button */
     .vote-btn {
         @apply bg-transparent border-2 border-green-500 text-green-400 px-4 py-2 rounded-lg font-semibold transition-all hover:bg-green-500 hover:text-black;
     }
-
     .vote-btn.voted {
         @apply bg-green-500 text-black;
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
     }
-
-    /* Link style button */
     .btn-link {
         @apply text-green-400 hover:text-green-300 font-semibold;
     }
-
     .btn-link-muted {
         @apply text-gray-500 hover:text-gray-400 transition-colors underline;
     }
 }
-
-/* ============================================
-   CARD COMPONENTS
-   ============================================ */
 @layer components {
-    /* Base card */
     .card {
-        @apply bg-zinc-900 rounded-xl border border-green-900/30 transition-all duration-300;
+        @apply rounded-xl transition-all duration-300;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
     }
-
-    .card-hover {
-        @apply hover:border-green-500/50;
-    }
-
     .card-hover:hover {
-        box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 30px var(--glow-color);
     }
-
     .card-body {
         @apply p-6;
     }
-
     .card-body-lg {
         @apply p-8;
     }
-
-    /* Game card */
     .game-card {
-        @apply bg-zinc-900 rounded-xl overflow-hidden border border-green-900/30 transition-all duration-300;
+        @apply rounded-xl overflow-hidden transition-all duration-300;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
     }
-
     .game-card:hover {
-        @apply border-green-500/50;
-        box-shadow: 0 0 30px rgba(0, 255, 0, 0.15);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 30px var(--glow-color);
     }
-
     .game-card-image {
         @apply h-48 flex items-center justify-center;
     }
-
     .game-card-content {
         @apply p-6;
     }
-
     .game-card-title {
-        @apply text-xl font-bold mb-2 text-white;
+        @apply text-xl font-bold mb-2;
+        color: var(--text-primary);
     }
-
     .game-card-studio {
-        @apply text-gray-500 text-sm mb-3;
+        @apply text-sm mb-3;
+        color: var(--text-secondary);
     }
-
     .game-card-desc {
-        @apply text-gray-400 text-sm mb-4;
+        @apply text-sm mb-4;
+        color: var(--text-secondary);
     }
-
     .game-card-footer {
         @apply flex items-center justify-between;
     }
-
-    /* Category card */
     .category-card {
-        @apply bg-zinc-900 rounded-xl p-6 border border-green-900/30 transition-all duration-300;
+        @apply rounded-xl p-6 transition-all duration-300;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
     }
-
     .category-card:hover {
-        @apply border-green-500/50 transform scale-105;
-        box-shadow: 0 0 30px rgba(0, 255, 0, 0.15);
+        @apply transform scale-105;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 30px var(--glow-color);
     }
-
     .category-card-icon {
         @apply text-5xl mb-4;
     }
-
     .category-card-title {
-        @apply text-2xl font-bold mb-3 text-white;
+        @apply text-2xl font-bold mb-3;
+        color: var(--text-primary);
     }
-
     .category-card-title-highlight {
-        @apply text-2xl font-bold mb-3 text-green-400;
-        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        @apply text-2xl font-bold mb-3;
+        color: var(--primary-color);
+        text-shadow: 0 0 10px var(--glow-color);
     }
-
     .category-card-desc {
-        @apply text-gray-500 mb-4;
+        @apply mb-4;
+        color: var(--text-secondary);
     }
-
-    /* Feature card (smaller) */
     .feature-card {
-        @apply bg-zinc-900 rounded-xl p-6 border border-green-900/30 transition-all duration-300;
+        @apply rounded-xl p-6 transition-all duration-300;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
     }
-
     .feature-card:hover {
-        @apply border-green-500/50 transform scale-105;
-        box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+        @apply transform scale-105;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 20px var(--glow-color);
     }
-
     .feature-card-icon {
         @apply text-4xl mb-4;
     }
-
     .feature-card-title {
-        @apply text-xl font-semibold mb-2 text-white;
+        @apply text-xl font-semibold mb-2;
+        color: var(--text-primary);
     }
-
     .feature-card-desc {
-        @apply text-gray-500;
+        color: var(--text-secondary);
     }
-
-    /* Info card */
     .info-card {
-        @apply bg-zinc-900 rounded-xl p-8 mb-8 border border-green-900/30;
+        @apply rounded-xl p-8 mb-8;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
     }
-
     .info-card-header {
         @apply flex items-center mb-6;
     }
-
     .info-card-icon {
         @apply text-4xl mr-4;
     }
-
     .info-card-title {
-        @apply text-2xl font-bold text-green-400;
+        @apply text-2xl font-bold;
+        color: var(--primary-color);
     }
-
-    /* Gradient card */
     .gradient-card {
         @apply bg-gradient-to-r from-green-900/30 to-black rounded-xl p-8 border border-green-900/50;
     }
-
     .gradient-card-border {
         @apply bg-gradient-to-r from-green-900/20 to-black rounded-xl p-8 border border-green-500/30;
         box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
     }
-
-    /* Promo card */
     .promo-card {
         @apply py-12 bg-gradient-to-r from-green-900/40 to-black rounded-2xl px-8 my-8 border border-green-500/30;
         box-shadow: 0 0 40px rgba(0, 255, 0, 0.1);
     }
-
     .promo-card-content {
         @apply flex flex-col md:flex-row items-center justify-between;
     }
-
     .promo-card-text {
         @apply mb-6 md:mb-0;
     }
-
     .promo-card-title {
         @apply text-3xl font-bold mb-4 text-green-400;
     }
-
     .promo-card-desc {
         @apply text-gray-400 max-w-md;
     }
 }
-
-/* ============================================
-   FORM COMPONENTS
-   ============================================ */
 @layer components {
-    /* Form group */
     .form-group {
         @apply mb-6;
     }
-
-    /* Labels */
     .form-label {
-        @apply block text-sm font-medium text-gray-300 mb-2;
+        @apply block text-sm font-medium mb-2;
+        color: var(--text-secondary);
     }
-
-    /* Input base */
     .form-input {
-        @apply w-full px-4 py-3 bg-zinc-900 border border-green-900/50 rounded-lg text-white placeholder-gray-600 transition-all duration-300;
+        @apply w-full px-4 py-3 rounded-lg transition-all duration-300;
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-primary);
     }
-
+    .form-input::placeholder {
+        color: var(--text-secondary);
+    }
     .form-input:focus {
-        @apply outline-none border-green-500;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        @apply outline-none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px var(--glow-color);
     }
-
     .form-input-lg {
-        @apply w-full px-4 py-3 bg-zinc-900 border border-green-900/50 rounded-lg text-white placeholder-gray-600 text-lg transition-all duration-300;
+        @apply w-full px-4 py-3 rounded-lg text-lg transition-all duration-300;
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-primary);
     }
-
+    .form-input-lg::placeholder {
+        color: var(--text-secondary);
+    }
     .form-input-lg:focus {
-        @apply outline-none border-green-500;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        @apply outline-none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px var(--glow-color);
     }
-
-    /* Search input with icon */
     .search-input-wrapper {
         @apply flex-grow relative;
     }
-
     .search-input {
-        @apply w-full px-4 py-3 pl-12 bg-zinc-900 border border-green-900/50 rounded-lg text-white placeholder-gray-600 transition-all duration-300;
+        @apply w-full px-4 py-3 pl-12 rounded-lg transition-all duration-300;
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-primary);
     }
-
+    .search-input::placeholder {
+        color: var(--text-secondary);
+    }
     .search-input:focus {
-        @apply outline-none border-green-500;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        @apply outline-none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px var(--glow-color);
     }
-
     .search-input-icon {
         @apply absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-600;
     }
-
-    /* Select */
     .form-select {
-        @apply px-4 py-3 bg-zinc-900 border border-green-900/50 rounded-lg text-white transition-all duration-300;
+        @apply px-4 py-3 rounded-lg transition-all duration-300;
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-primary);
     }
-
     .form-select:focus {
-        @apply outline-none border-green-500;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        @apply outline-none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px var(--glow-color);
     }
-
-    /* Textarea */
     .form-textarea {
-        @apply w-full px-4 py-3 bg-zinc-900 border border-green-900/50 rounded-lg text-white placeholder-gray-600 resize-none transition-all duration-300;
+        @apply w-full px-4 py-3 rounded-lg resize-none transition-all duration-300;
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-primary);
     }
-
+    .form-textarea::placeholder {
+        color: var(--text-secondary);
+    }
     .form-textarea:focus {
-        @apply outline-none border-green-500;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        @apply outline-none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px var(--glow-color);
     }
-
-    /* Submit button */
     .form-submit {
         @apply w-full bg-green-600 hover:bg-green-500 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300;
         box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     }
-
     .form-submit:hover {
         box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
     }
 }
-
-/* ============================================
-   BADGE COMPONENTS
-   ============================================ */
 @layer components {
     .badge {
         @apply inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
     }
-
     .badge-action {
         @apply bg-red-900/50 text-red-400 border border-red-500/30;
     }
-
     .badge-rpg {
         @apply bg-green-900/50 text-green-400 border border-green-500/30;
     }
-
     .badge-indie {
         @apply bg-cyan-900/50 text-cyan-400 border border-cyan-500/30;
     }
-
     .badge-adventure {
         @apply bg-yellow-900/50 text-yellow-400 border border-yellow-500/30;
     }
-
     .badge-favorite {
         @apply absolute top-3 right-3 bg-green-500 text-black px-3 py-1 rounded-full text-sm font-bold;
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
     }
-
     .badge-hit {
         @apply absolute top-3 right-3 bg-green-500 text-black px-3 py-1 rounded-full text-sm font-bold;
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
     }
 }
-
-/* ============================================
-   FAQ COMPONENTS
-   ============================================ */
 @layer components {
-    .faq-item {
-        @apply border-b border-green-900/30 py-4;
-    }
-
-    .faq-question {
-        @apply w-full text-left flex items-center justify-between py-2 text-lg font-semibold text-white hover:text-green-400 transition-colors cursor-pointer;
-    }
-
-    .faq-icon {
-        @apply w-6 h-6 text-green-500 transform transition-transform duration-300;
-    }
-
-    .faq-icon-open {
-        @apply rotate-180;
-    }
-
-    .faq-answer {
-        @apply hidden mt-4 text-gray-400 pb-4;
-    }
-
-    .faq-answer-open {
-        @apply block;
-    }
-}
-
-/* ============================================
-   GTG GAME COMPONENTS
-   ============================================ */
-@layer components {
-    /* Stats */
     .game-stats {
         @apply flex justify-center gap-8 mb-8;
     }
-
     .game-stat {
         @apply text-center;
     }
-
     .game-stat-value {
         @apply text-3xl font-bold;
     }
-
     .game-stat-value-green {
-        @apply text-3xl font-bold text-green-400;
-        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        @apply text-3xl font-bold;
+        color: var(--primary-color);
+        text-shadow: 0 0 10px var(--glow-color);
     }
-
     .game-stat-value-yellow {
         @apply text-3xl font-bold text-yellow-400;
     }
-
     .game-stat-value-purple {
         @apply text-3xl font-bold text-green-300;
     }
-
     .game-stat-label {
         @apply text-gray-500 text-sm;
     }
-
-    /* Attempts indicator */
     .attempts-container {
         @apply flex gap-1;
     }
-
     .attempt-dot {
         @apply w-3 h-3 rounded-full;
     }
-
     .attempt-dot-active {
         @apply bg-green-500;
         box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
     }
-
     .attempt-dot-used {
         @apply bg-red-500;
     }
-
-    /* Hints */
     .hints-container {
         @apply bg-green-900/20 rounded-xl p-6 mb-6 border border-green-500/30;
     }
-
     .hints-title {
         @apply text-lg font-semibold mb-3 text-green-400;
     }
-
     .hint-text {
         @apply text-green-300;
     }
-
-    /* Result message */
     .result-message {
         @apply text-center py-6 rounded-xl mb-6;
     }
-
     .result-message-success {
         @apply bg-green-900/30 border border-green-500;
         box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
     }
-
     .result-message-error {
         @apply bg-red-900/30 border border-red-500;
     }
-
     .result-icon {
         @apply text-6xl mb-4;
     }
-
     .result-title {
         @apply text-2xl font-bold mb-2;
     }
-
     .result-text {
         @apply text-gray-400 mb-4;
     }
-
-    /* How to play */
     .how-to-play {
         @apply max-w-3xl mx-auto mt-12;
     }
-
     .how-to-play-step {
         @apply flex items-start gap-3;
     }
-
     .how-to-play-number {
         @apply w-8 h-8 bg-green-600 text-black rounded-full flex items-center justify-center font-bold flex-shrink-0;
     }
 }
-
-/* ============================================
-   HERO SECTION
-   ============================================ */
 @layer components {
     .hero {
         @apply text-center py-16;
     }
-
     .hero-buttons {
         @apply flex flex-wrap justify-center gap-4;
     }
 }
-
-/* ============================================
-   PAGE HEADER
-   ============================================ */
 @layer components {
     .page-header {
         @apply text-center py-12;
     }
-
     .page-header-sm {
         @apply text-center py-8;
     }
 }
-
-/* ============================================
-   GRID LAYOUTS
-   ============================================ */
 @layer components {
     .grid-3 {
         @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
     }
-
     .grid-2 {
         @apply grid grid-cols-1 md:grid-cols-2 gap-6;
     }
-
     .grid-4 {
         @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
     }
 }
-
-/* ============================================
-   CONTACT PAGE COMPONENTS
-   ============================================ */
 @layer components {
     .contact-grid {
         @apply grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto;
     }
-
     .contact-info-item {
         @apply flex items-start space-x-4;
     }
-
     .contact-info-icon {
-        @apply w-12 h-12 bg-green-900/30 border border-green-500/30 rounded-lg flex items-center justify-center flex-shrink-0;
+        @apply w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0;
+        background-color: var(--card-hover);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
     }
-
     .contact-info-title {
-        @apply font-semibold text-lg text-white;
+        @apply font-semibold text-lg;
+        color: var(--text-primary);
     }
-
     .contact-info-text {
         @apply text-gray-500;
     }
-
     .social-links {
         @apply flex space-x-4;
     }
-
     .social-link {
         @apply w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300;
     }
-
     .social-link-facebook {
         @apply bg-blue-900/50 border border-blue-500/30 hover:bg-blue-800;
     }
-
     .social-link-twitter {
         @apply bg-sky-900/50 border border-sky-500/30 hover:bg-sky-800;
     }
-
     .social-link-instagram {
         @apply bg-pink-900/50 border border-pink-500/30 hover:bg-pink-800;
     }
-
     .social-link-youtube {
         @apply bg-red-900/50 border border-red-500/30 hover:bg-red-800;
     }
-
     .social-link-discord {
         @apply bg-green-900/50 border border-green-500/30 hover:bg-green-800;
     }
 }
-
-/* ============================================
-   ABOUT PAGE COMPONENTS
-   ============================================ */
 @layer components {
     .about-section {
         @apply max-w-4xl mx-auto;
     }
-
     .author-card {
         @apply flex flex-col md:flex-row items-center gap-6;
     }
-
     .author-avatar {
         @apply w-32 h-32 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center text-4xl;
         box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
     }
-
     .author-name {
-        @apply text-xl font-semibold mb-2 text-white;
+        @apply text-xl font-semibold mb-2;
+        color: var(--text-primary);
     }
-
     .author-role {
         @apply text-green-400 mb-3;
     }
-
     .author-bio {
         @apply text-gray-500;
     }
 }
-
-/* ============================================
-   NOTIFICATION / TOAST
-   ============================================ */
 @layer components {
     .notification {
         @apply fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300;
     }
-
     .notification-hidden {
         @apply translate-y-full;
     }
-
     .notification-success {
-        @apply bg-green-600 text-black font-semibold;
-        box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+        @apply font-semibold;
+        background-color: var(--primary-color);
+        color: var(--darker-bg);
+        box-shadow: 0 0 20px var(--glow-color);
     }
-
     .notification-error {
-        @apply bg-red-600 text-white;
+        background-color: var(--error-color);
+        color: #ffffff;
     }
-
     .notification-info {
         @apply bg-green-900 text-green-400 border border-green-500/50;
     }
 }
-
-/* ============================================
-   SUCCESS MESSAGE
-   ============================================ */
 @layer components {
     .success-message {
         @apply mt-6 p-4 bg-green-900/30 border border-green-500 rounded-lg text-green-400 text-center;
         box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
     }
 }
-
-/* ============================================
-   NO RESULTS
-   ============================================ */
 @layer components {
     .no-results {
         @apply text-center py-12;
     }
-
     .no-results-icon {
         @apply text-6xl mb-4;
     }
-
     .no-results-title {
-        @apply text-2xl font-bold mb-2 text-white;
+        @apply text-2xl font-bold mb-2;
+        color: var(--text-primary);
     }
-
     .no-results-text {
         @apply text-gray-500;
     }
 }
-
-/* ============================================
-   CATEGORY SECTION
-   ============================================ */
 @layer components {
     .category-section {
         @apply mb-12;
     }
-
     .category-section-title {
         @apply text-3xl font-bold mb-6 flex items-center text-green-400;
     }
-
     .category-section-icon {
         @apply text-4xl mr-3;
     }
 }
-
-/* ============================================
-   MESSAGES PAGE COMPONENTS
-   ============================================ */
 @layer components {
     .message-card {
-        @apply bg-zinc-900 rounded-xl p-6 border border-green-900/30 mb-4 transition-all duration-300;
+        @apply rounded-xl p-6 mb-4 transition-all duration-300;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
     }
-
     .message-card:hover {
         @apply border-green-500/50;
         box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
     }
-
     .message-header {
         @apply flex justify-between items-start mb-4 pb-4 border-b border-green-900/30;
     }
-
     .message-sender {
         @apply font-bold text-green-400;
     }
-
     .message-email {
         @apply text-gray-500 text-sm;
     }
-
     .message-date {
         @apply text-gray-600 text-sm;
     }
-
     .message-subject {
         @apply text-lg font-semibold text-white mb-2;
     }
-
     .message-content {
         @apply text-gray-400;
     }
-
     .message-delete-btn {
         @apply text-red-400 hover:text-red-300 text-sm transition-colors;
     }
 }
-
-/* ============================================
-   UTILITY COMPONENTS
-   ============================================ */
 @layer components {
-    /* Centered content container */
     .content-center {
         @apply max-w-3xl mx-auto;
     }
-
     .content-wide {
         @apply max-w-6xl mx-auto;
     }
-
-    /* Flex utilities */
     .flex-center {
         @apply flex items-center justify-center;
     }
-
     .flex-between {
         @apply flex items-center justify-between;
     }
-
-    /* Spacing */
     .space-section {
         @apply space-y-8;
     }
-
     .space-cards {
         @apply space-y-6;
     }
 }
-
-/* ============================================
-   ANIMATIONS
-   ============================================ */
 @layer utilities {
     @keyframes fadeInUp {
         from {
@@ -1027,7 +829,6 @@
             transform: translateY(0);
         }
     }
-
     @keyframes pulse-glow {
         0%,
         100% {
@@ -1037,7 +838,6 @@
             box-shadow: 0 0 40px rgba(0, 255, 0, 0.6);
         }
     }
-
     @keyframes float {
         0%,
         100% {
@@ -1047,29 +847,21 @@
             transform: translateY(-10px);
         }
     }
-
     @keyframes spin {
         to {
             transform: rotate(360deg);
         }
     }
-
     .animate-fade-in-up {
         animation: fadeInUp 0.6s ease forwards;
     }
-
     .animate-pulse-glow {
         animation: pulse-glow 2s infinite;
     }
-
     .animate-float {
         animation: float 3s ease-in-out infinite;
     }
 }
-
-/* ============================================
-   LOADING SPINNER
-   ============================================ */
 @layer components {
     .spinner {
         @apply rounded-full w-10 h-10 border-4 border-green-900;
@@ -1077,36 +869,25 @@
         animation: spin 1s linear infinite;
     }
 }
-
-/* ============================================
-   RESPONSIVE UTILITIES
-   ============================================ */
 @layer utilities {
     @media (max-width: 768px) {
         .hide-mobile {
             display: none !important;
         }
     }
-
     @media (min-width: 769px) {
         .hide-desktop {
             display: none !important;
         }
     }
 }
-
-/* ============================================
-   GLOW EFFECTS
-   ============================================ */
 @layer utilities {
     .glow-green {
         box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     }
-
     .glow-green-strong {
         box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
     }
-
     .text-glow-green {
         text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
     }

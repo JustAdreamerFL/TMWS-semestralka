@@ -1,15 +1,12 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.html",
-    "./sub_pages/**/*.html",
-    "./sub_pages/scripts/**/*.js",
+    ".*.html",
+    "./sub_pages/scripts*.js",
     "./*.js",
   ],
   theme: {
     extend: {
       colors: {
-        // Razer Green Theme
         primary: {
           DEFAULT: "#00ff00",
           hover: "#00cc00",
@@ -45,7 +42,6 @@ module.exports = {
           DEFAULT: "#ffaa00",
           hover: "#cc8800",
         },
-        // Dark backgrounds
         dark: {
           DEFAULT: "#0a0a0a",
           50: "#1a1a1a",

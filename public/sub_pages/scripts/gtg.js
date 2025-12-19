@@ -1,6 +1,3 @@
-// GTG - Guess The Game - Mini hra
-// Databáza hier s opismi a nápovedami
-
 const gamesDatabase = [
   {
     name: "The Witcher 3: Wild Hunt",
@@ -112,7 +109,7 @@ const gamesDatabase = [
     description:
       "Roguelike hra kde sa snažíš uniknúť z podsvetia. Hráš za syna boha mŕtvych a musíš bojovať cez hordý nepriateľov znova a znova.",
     hints: [
-      "Žáner: Roguelike / Akcia",
+      "Žáner: Roguelike / Akčná",
       "Vývojár: Supergiant Games",
       "Hlavná postava je Zagreus, syn Háda",
     ],
@@ -173,8 +170,6 @@ const gamesDatabase = [
     ],
   },
 ];
-
-// Herný stav
 let gameState = {
   currentGame: null,
   score: 0,
@@ -184,8 +179,6 @@ let gameState = {
   hintsShown: 0,
   usedGames: [],
 };
-
-// DOM elementy
 let scoreEl,
   streakEl,
   roundEl,
@@ -195,10 +188,7 @@ let scoreEl,
   guessForm,
   guessInput;
 let resultMessage, resultIcon, resultTitle, resultText, nextBtn, skipBtn;
-
-// Inicializácia hry
 document.addEventListener("DOMContentLoaded", function () {
-  // Získanie DOM elementov
   scoreEl = document.getElementById("score");
   streakEl = document.getElementById("streak");
   roundEl = document.getElementById("round");
@@ -213,132 +203,95 @@ document.addEventListener("DOMContentLoaded", function () {
   resultText = document.getElementById("result-text");
   nextBtn = document.getElementById("next-btn");
   skipBtn = document.getElementById("skip-btn");
-
-  // Event listeners
   guessForm.addEventListener("submit", handleGuess);
   nextBtn.addEventListener("click", nextRound);
   skipBtn.addEventListener("click", skipGame);
-
-  // Štart hry
   loadNewGame();
 });
-
-// Načítanie novej hry
 function loadNewGame() {
-  // Reset pokusov a nápoved
   gameState.attempts = 3;
   gameState.hintsShown = 0;
-
-  // Vyber náhodnú hru, ktorá ešte nebola použitá
   let availableGames = gamesDatabase.filter(
-    (game) => !gameState.usedGames.includes(game.name)
+    (game) => !gameState.usedGames.includes(game.name),
   );
-
-  // Ak sme prešli všetky hry, resetuj
   if (availableGames.length === 0) {
     gameState.usedGames = [];
     availableGames = gamesDatabase;
   }
-
   const randomIndex = Math.floor(Math.random() * availableGames.length);
   gameState.currentGame = availableGames[randomIndex];
   gameState.usedGames.push(gameState.currentGame.name);
-
-  // Aktualizuj UI
   updateUI();
   descriptionEl.textContent = gameState.currentGame.description;
   hintsEl.innerHTML =
     '<p class="text-gray-400 italic">Nápovedy sa zobrazia po nesprávnej odpovedi</p>';
-
-  // Skry výsledok a zobraz input
   resultMessage.classList.add("hidden");
   guessForm.classList.remove("hidden");
   skipBtn.classList.remove("hidden");
   guessInput.value = "";
   guessInput.focus();
 }
-
-// Spracovanie tipu
 function handleGuess(e) {
   e.preventDefault();
-
   const guess = guessInput.value.trim().toLowerCase();
   if (!guess) return;
-
   const currentGame = gameState.currentGame;
-  const correctAnswers = [currentGame.name.toLowerCase(), ...currentGame.aliases.map((a) => a.toLowerCase())];
-
+  const correctAnswers = [
+    currentGame.name.toLowerCase(),
+    ...currentGame.aliases.map((a) => a.toLowerCase()),
+  ];
   if (correctAnswers.includes(guess)) {
-    // Správna odpoveď
     handleCorrectGuess();
   } else {
-    // Nesprávna odpoveď
     handleWrongGuess();
   }
-
   guessInput.value = "";
 }
-
-// Správna odpoveď
 function handleCorrectGuess() {
-  // Vypočítaj body (viac bodov za menej pokusov)
   const points = gameState.attempts * 10;
   gameState.score += points;
   gameState.streak += 1;
-
-  // Zobraz výsledok
   showResult(
     true,
-    "🎉",
+    "",
     "Správne!",
-    `Hra bola: ${gameState.currentGame.name}. Získal si ${points} bodov!`
+    `Hra bola: ${gameState.currentGame.name}. Získal si ${points} bodov!`,
   );
-
   updateUI();
 }
-
-// Nesprávna odpoveď
 function handleWrongGuess() {
   gameState.attempts -= 1;
   updateAttemptsDisplay();
-
   if (gameState.attempts <= 0) {
-    // Koniec pokusov
     gameState.streak = 0;
     showResult(
       false,
-      "😔",
+      "",
       "Škoda!",
-      `Správna odpoveď bola: ${gameState.currentGame.name}`
+      `Správna odpoveď bola: ${gameState.currentGame.name}`,
     );
     updateUI();
   } else {
-    // Zobraz nápovedu
     showHint();
     guessInput.focus();
   }
 }
-
-// Zobrazenie nápovedy
 function showHint() {
   const hints = gameState.currentGame.hints;
   if (gameState.hintsShown < hints.length) {
     const hintHtml =
       gameState.hintsShown === 0
-        ? `<p class="text-yellow-400">💡 ${hints[gameState.hintsShown]}</p>`
+        ? `<p class="text-yellow-400">Nápoveda: ${hints[gameState.hintsShown]}</p>`
         : hintsEl.innerHTML +
-          `<p class="text-yellow-400">💡 ${hints[gameState.hintsShown]}</p>`;
+          `<p class="text-yellow-400">Nápoveda: ${hints[gameState.hintsShown]}</p>`;
     hintsEl.innerHTML = hintHtml;
     gameState.hintsShown++;
   }
 }
-
-// Zobrazenie výsledku
 function showResult(success, icon, title, text) {
   resultIcon.textContent = icon;
   resultTitle.textContent = title;
   resultText.textContent = text;
-
   if (success) {
     resultMessage.className =
       "text-center py-6 rounded-xl mb-6 bg-green-900/50 border border-green-500";
@@ -346,31 +299,24 @@ function showResult(success, icon, title, text) {
     resultMessage.className =
       "text-center py-6 rounded-xl mb-6 bg-red-900/50 border border-red-500";
   }
-
   resultMessage.classList.remove("hidden");
   guessForm.classList.add("hidden");
   skipBtn.classList.add("hidden");
 }
-
-// Ďalšie kolo
 function nextRound() {
   gameState.round += 1;
   loadNewGame();
 }
-
-// Preskočenie hry
 function skipGame() {
   gameState.streak = 0;
   showResult(
     false,
-    "⏭️",
+    "",
     "Preskočené",
-    `Správna odpoveď bola: ${gameState.currentGame.name}`
+    `Správna odpoveď bola: ${gameState.currentGame.name}`,
   );
   updateUI();
 }
-
-// Aktualizácia pokusov
 function updateAttemptsDisplay() {
   let html = "";
   for (let i = 0; i < 3; i++) {
@@ -382,8 +328,6 @@ function updateAttemptsDisplay() {
   }
   attemptsEl.innerHTML = html;
 }
-
-// Aktualizácia UI
 function updateUI() {
   scoreEl.textContent = gameState.score;
   streakEl.textContent = gameState.streak;
